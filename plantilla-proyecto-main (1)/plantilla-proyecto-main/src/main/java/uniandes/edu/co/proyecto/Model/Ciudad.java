@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.Model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
