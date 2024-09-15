@@ -7,23 +7,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import uniandes.edu.co.proyecto.Model.Ciudad;
+import uniandes.edu.co.proyecto.Model.Bodega;
 
-public interface CiudadRepository extends JpaRepository <Ciudad, Integer>{
-    //Para seleccionar todas las cuentas
-    @Query(value = "SELECT * FROM ciudad", nativeQuery = true)
-    Collection<Ciudad> darCiudad();
+
+public interface BodegaRepository extends JpaRepository <Bodega, Integer> {
+    @Query(value = "SELECT * FROM bodega", nativeQuery = true)
+    Collection<Bodega> darBodega();
     
     //Para selecionar una cuenta en base al id
-    @Query(value = "SELECT * FROM ciudad WHERE id = :id", nativeQuery = true)
-    Ciudad darCiudadPorId(@Param("id") Integer id);
+    @Query(value = "SELECT * FROM bodega WHERE id = :id", nativeQuery = true)
+    Bodega darBodegaPorId(@Param("id") Integer id);
     
     //crear Cuenta
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO ciudad (id, nombre) VALUES ( id.nextval , :nombre)", nativeQuery = true)
-    void insertarCiudad(@Param("nombre") String nombre);
-
-    //--------------------------------------------------------------------------------------------------------
+    void insertarBodega(@Param("nombre") String nombre,@Param("tamano") String tamano,
+    @Param("cantiaProd") String cantiaProd);
     
 }
