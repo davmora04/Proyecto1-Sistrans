@@ -45,5 +45,13 @@ public String bodega(Model model, Integer id) {
         bodegaRepository.insertarBodega(bodega.getNombre(),bodega.getTamano(),bodega.getCantiaProd());
         return "redirect:/ciudad";
     }  
-//------------------------------------------------------------------------------------------------------      
+//------------------------------------------------------------------------------------------------------  
+
+
+
+
+
+
+
+
 }
