@@ -1,4 +1,5 @@
-package uniandes.edu.co.proyecto.Model;
+package uniandes.edu.co.proyecto.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -68,3 +69,4 @@ public class Sucursal {
     }
     
 }
+

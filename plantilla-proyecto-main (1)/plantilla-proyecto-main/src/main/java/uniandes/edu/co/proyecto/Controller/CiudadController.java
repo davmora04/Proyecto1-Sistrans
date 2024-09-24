@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-import uniandes.edu.co.proyecto.Model.Ciudad;
-import uniandes.edu.co.proyecto.Repository.CiudadRepository;
+import uniandes.edu.co.proyecto.repository.CiudadRepository;
+import uniandes.edu.co.proyecto.model.Ciudad;
 
 import org.springframework.ui.Model;
 

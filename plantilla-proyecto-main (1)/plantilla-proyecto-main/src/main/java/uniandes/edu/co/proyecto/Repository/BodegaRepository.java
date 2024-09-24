@@ -1,4 +1,5 @@
-package uniandes.edu.co.proyecto.Repository;
+package uniandes.edu.co.proyecto.repository;
+
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import uniandes.edu.co.proyecto.Model.Bodega;
+import uniandes.edu.co.proyecto.model.Bodega;
 
 
 public interface BodegaRepository extends JpaRepository <Bodega, Integer> {

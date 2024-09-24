@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-
-import uniandes.edu.co.proyecto.Model.Sucursal;
-
-import uniandes.edu.co.proyecto.Repository.SucursalRepository;
+import uniandes.edu.co.proyecto.repository.SucursalRepository;
+import uniandes.edu.co.proyecto.model.Sucursal;
 
 import org.springframework.ui.Model;
 @Controller
@@ -47,3 +44,4 @@ public String sucursal(Model model, Integer id) {
         return "redirect:/sucursal";
     }  
 }
+

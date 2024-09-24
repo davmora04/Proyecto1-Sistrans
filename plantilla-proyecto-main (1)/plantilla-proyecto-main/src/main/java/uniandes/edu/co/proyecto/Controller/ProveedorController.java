@@ -1,14 +1,17 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import uniandes.edu.co.proyecto.Model.Proveedores;
-import uniandes.edu.co.proyecto.Repository.ProveedoresRepository;
+
+import uniandes.edu.co.proyecto.repository.ProveedoresRepository;
+import uniandes.edu.co.proyecto.model.Proveedores;
+
 import org.springframework.ui.Model;
 
-public class ProveedoresController {
+public class ProveedorController {
 
     
     @Autowired
