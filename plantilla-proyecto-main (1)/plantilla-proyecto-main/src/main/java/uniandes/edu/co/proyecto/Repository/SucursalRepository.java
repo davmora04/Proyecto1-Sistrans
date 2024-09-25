@@ -8,17 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import uniandes.edu.co.proyecto.model.Ciudad;
 import uniandes.edu.co.proyecto.model.Sucursal;
 
 public interface SucursalRepository extends JpaRepository <Sucursal, Integer> {
     //Para seleccionar todas las cuentas
     @Query(value = "SELECT * FROM sucursal", nativeQuery = true)
-    Collection<Ciudad> darSucursal();
+    Collection<Sucursal> darSucursal();
     
     //Para selecionar una cuenta en base al id
     @Query(value = "SELECT * FROM sucursal WHERE id = :id", nativeQuery = true)
-    Ciudad darSucursalPorId(@Param("id") Integer id);
+    Sucursal darSucursalPorId(@Param("id") Integer id);
     
     //crear Cuenta
     @Modifying

@@ -15,13 +15,11 @@ import org.springframework.ui.Model;
 public class SucursalController {
      @Autowired
     private SucursalRepository sucursalRepository;
-    @GetMapping("/sucusal")
+    @GetMapping("/sucursal")
 public String sucursal(Model model, Integer id) {
-    if(id != null && !id.equals(null)) {
-        model.addAttribute("sucursal", sucursalRepository.darSucursalPorId(id));
-    } else {
-        model.addAttribute("sucursal", sucursalRepository.darSucursal());
-    }
+    System.out.println("holi");
+    model.addAttribute("sucursal", sucursalRepository.darSucursal());
+    System.out.println(sucursalRepository.darSucursal());
     return "sucursal";
 }
 
@@ -43,5 +41,7 @@ public String sucursal(Model model, Integer id) {
         );
         return "redirect:/sucursal";
     }  
+
+    
 }
 
