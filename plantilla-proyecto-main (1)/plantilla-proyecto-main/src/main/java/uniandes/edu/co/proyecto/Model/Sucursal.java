@@ -1,39 +1,46 @@
 package uniandes.edu.co.proyecto.model;
 
+import jakarta.persistence.GenerationType; 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.lang.Integer; 
 
 @Entity
-@Table
+@Table(name="SUCURSAL")
 public class Sucursal {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    private Integer id;
+     @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id_sucursal;
+
     private String nombre;
-    private String ciudad;
-    private Integer tamano;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_ciudad", referencedColumnName = "codigo") 
+    private Ciudad ciudad;
+    
+    private Integer intalacionM2;
     private String telefono;
     public Sucursal(){;}
     
-    public Sucursal(Integer id,String nombre, String ciudad,Integer tamano, String telefono ) {
-        this.id = id;
+    public Sucursal(Integer id_sucursal,String nombre, Ciudad ciudad, Integer intalacionM2, String telefono ) {
+        this.id_sucursal = id_sucursal;
         this.nombre  = nombre;
         this.ciudad = ciudad;
-        this.tamano = tamano;
+        this.intalacionM2 = intalacionM2;
         this.telefono = telefono;
 
 }
 
     public Integer getId() {
-        return id;
+        return id_sucursal;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_sucursal) {
+        this.id_sucursal = id_sucursal;
     }
 
     public String getNombre() {
@@ -44,20 +51,20 @@ public class Sucursal {
         this.nombre = nombre;
     }
 
-    public String getCiudad() {
+    public Ciudad getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(String ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 
-    public Integer getTamano() {
-        return tamano;
+    public Integer getInstalacionM2() {
+        return intalacionM2;
     }
 
-    public void setTamano(Integer tamano) {
-        this.tamano = tamano;
+    public void setInstalacionM2(Integer intalacionM2) {
+        this.intalacionM2 = intalacionM2;
     }
 
     public String getTelefono() {
