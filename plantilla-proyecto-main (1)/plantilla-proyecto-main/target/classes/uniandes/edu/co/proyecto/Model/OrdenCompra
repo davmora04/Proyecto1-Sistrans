@@ -1,0 +1,100 @@
+package uniandes.edu.co.proyecto.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.util.Date;
+
+@Entity
+@Table(name="ORDENCOMPRA")
+public class OrdenCompra {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id_compra;
+
+    private Integer cantidad;
+    private Double precioAcordado;
+    private Date fechaEspera;
+    private String estado;
+    
+    private Integer id_sucursal;
+    private Integer id_producto;
+    private Integer id_proveedor;
+
+    public OrdenCompra(){}
+
+    public OrdenCompra(Integer cantidad, Double precioAcordado, Date fechaEspera, String estado, 
+                       Integer id_sucursal, Integer id_producto, Integer id_proveedor) {
+        this.cantidad = cantidad;
+        this.precioAcordado = precioAcordado;
+        this.fechaEspera = fechaEspera;
+        this.estado = estado;
+        this.id_sucursal = id_sucursal;
+        this.id_producto = id_producto;
+        this.id_proveedor = id_proveedor;
+    }
+
+    // Getters y Setters
+    public Integer getId_compra() {
+        return id_compra;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Double getPrecioAcordado() {
+        return precioAcordado;
+    }
+
+    public void setPrecioAcordado(Double precioAcordado) {
+        this.precioAcordado = precioAcordado;
+    }
+
+    public Date getFechaEspera() {
+        return fechaEspera;
+    }
+
+    public void setFechaEspera(Date fechaEspera) {
+        this.fechaEspera = fechaEspera;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Integer getId_sucursal() {
+        return id_sucursal;
+    }
+
+    public void setId_sucursal(Integer id_sucursal) {
+        this.id_sucursal = id_sucursal;
+    }
+
+    public Integer getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(Integer id_producto) {
+        this.id_producto = id_producto;
+    }
+
+    public Integer getId_proveedor() {
+        return id_proveedor;
+    }
+
+    public void setId_proveedor(Integer id_proveedor) {
+        this.id_proveedor = id_proveedor;
+    }
+}

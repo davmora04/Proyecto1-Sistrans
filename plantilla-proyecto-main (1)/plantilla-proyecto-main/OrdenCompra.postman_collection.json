@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "815efd33-c9ff-4e07-b4d7-536df780aa77",
+		"name": "OrdenCompra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37633875"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cantidad\": 100,\r\n    \"precioAcordado\": 5000.50,\r\n    \"fechaEspera\": \"2024-10-05T12:00:00\",\r\n    \"estado\": \"vigente\",\r\n    \"id_sucursal\": 1,\r\n    \"id_producto\": 3,\r\n    \"id_proveedor\": 2\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ordencompra/new/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ordencompra",
+						"new",
+						"save"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
