@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.model;
+package uniandes.edu.co.proyecto.Model;
 
 import jakarta.persistence.GenerationType; 
 import jakarta.persistence.Entity;
