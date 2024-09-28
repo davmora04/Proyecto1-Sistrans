@@ -19,4 +19,11 @@ public interface BodegaRepository extends JpaRepository<Bodega, Integer> {
     // Read BODEGA by ID
     @Query(value = "SELECT * FROM bodega WHERE id_bodega = :id_bodega", nativeQuery = true)
     Bodega leerBodega(@Param("id_bodega") Integer id_bodega);
+
+    // Delete BODEGA by ID
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM bodega WHERE id_bodega = :id_bodega", nativeQuery = true)
+    void eliminarBodega(@Param("id_bodega") Integer id_bodega);
+
 }

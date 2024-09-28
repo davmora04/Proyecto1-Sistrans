@@ -10,10 +10,16 @@
 			"name": "New Request",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id_bodega\": 1,\r\n    \"nombre\": \"Bodega Central\",\r\n    \"tamano\": 1000,\r\n    \"cantidad_prod\": 500,\r\n    \"id_sucursal\": 3\r\n}\r\n",
+					"raw": "{\r\n    \"id_bodega\": 1\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +27,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/bodega/new/save\n",
+					"raw": "http://localhost:8080/bodega/new/save",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -30,7 +36,42 @@
 					"path": [
 						"bodega",
 						"new",
-						"save\n"
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_bodega\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bodega/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bodega",
+						"delete"
 					]
 				}
 			},

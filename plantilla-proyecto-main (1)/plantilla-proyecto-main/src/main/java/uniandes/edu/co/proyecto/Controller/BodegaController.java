@@ -2,14 +2,21 @@ package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Map;
+
+
+
 
 import uniandes.edu.co.proyecto.model.Bodega;
 import uniandes.edu.co.proyecto.repository.BodegaRepository;
@@ -57,4 +64,25 @@ public class BodegaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    // Delete Bodega by ID
+    // Delete Bodega by ID
+    @DeleteMapping("/bodega/delete")
+    public ResponseEntity<String> deleteBodega(@RequestBody Map<String, Object> body) {
+        try {
+            Integer idBodega = (Integer) body.get("id_bodega");
+
+            if (idBodega == null) {
+                return new ResponseEntity<>("id_bodega is required", HttpStatus.BAD_REQUEST);
+            }
+
+            bodegaRepository.eliminarBodega(idBodega);
+            return ResponseEntity.status(HttpStatus.OK).body("Bodega eliminada exitosamente");
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al eliminar la Bodega: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
 }
