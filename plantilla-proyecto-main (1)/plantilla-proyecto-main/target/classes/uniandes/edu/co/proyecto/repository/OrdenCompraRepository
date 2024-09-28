@@ -10,18 +10,24 @@ import uniandes.edu.co.proyecto.model.OrdenCompra;
 
 public interface OrdenCompraRepository extends JpaRepository<OrdenCompra, Integer> {
 
-    // Insertar Orden de Compra
+    // Insertar una nueva ORDEN_COMPRA
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ORDENCOMPRA (cantidad, precioAcordado, fechaEspera, estado, id_sucursal, id_producto, id_proveedor) " +
-            "VALUES (:cantidad, :precioAcordado, :fechaEspera, :estado, :id_sucursal, :id_producto, :id_proveedor)", nativeQuery = true)
-    void insertarOrdenCompra(
-            @Param("cantidad") Integer cantidad,
-            @Param("precioAcordado") Double precioAcordado,
-            @Param("fechaEspera") java.util.Date fechaEspera,
-            @Param("estado") String estado,
-            @Param("id_sucursal") Integer id_sucursal,
-            @Param("id_producto") Integer id_producto,
-            @Param("id_proveedor") Integer id_proveedor
-    );
+    @Query(value = "INSERT INTO ordencompra (id_compra, cantidad, precioacordado, fechaespera, fecha_creacion, estado, id_sucursal, id_producto, id_proveedor) " +
+                   "VALUES (:idCompra, :cantidad, :precioAcordado, :fechaEspera, :fechaCreacion, :estado, :idSucursal, :idProducto, :idProveedor)", nativeQuery = true)
+    void insertarOrdenCompra(@Param("idCompra") Integer idCompra, 
+                             @Param("cantidad") Integer cantidad, 
+                             @Param("precioAcordado") Double precioAcordado, 
+                             @Param("fechaEspera") String fechaEspera, 
+                             @Param("fechaCreacion") String fechaCreacion, 
+                             @Param("estado") String estado, 
+                             @Param("idSucursal") Integer idSucursal, 
+                             @Param("idProducto") Integer idProducto, 
+                             @Param("idProveedor") Integer idProveedor);
+
+    // Actualizar el estado de la orden de compra a "anulada" solo si está en estado "vigente"
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE ordencompra SET estado = 'anulada' WHERE id_compra = :idCompra AND estado = 'vigente'", nativeQuery = true)
+    int anularOrdenCompra(@Param("idCompra") Integer idCompra);
 }
