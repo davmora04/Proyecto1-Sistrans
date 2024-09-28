@@ -4,8 +4,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.lang.Integer; 
 
@@ -18,28 +16,18 @@ public class Sucursal {
 
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo_ciudad", referencedColumnName = "codigo") 
-    private Ciudad ciudad;
+    private Integer codigo_ciudad;
     
     private Integer intalacionM2;
     private String telefono;
+
     public Sucursal(){;}
-    
-    public Sucursal(Integer id_sucursal,String nombre, Ciudad ciudad, Integer intalacionM2, String telefono ) {
-        this.id_sucursal = id_sucursal;
-        this.nombre  = nombre;
-        this.ciudad = ciudad;
-        this.intalacionM2 = intalacionM2;
-        this.telefono = telefono;
 
-}
-
-    public Integer getId() {
+    public Integer getId_sucursal() {
         return id_sucursal;
     }
 
-    public void setId(Integer id_sucursal) {
+    public void setId_sucursal(Integer id_sucursal) {
         this.id_sucursal = id_sucursal;
     }
 
@@ -51,19 +39,19 @@ public class Sucursal {
         this.nombre = nombre;
     }
 
-    public Ciudad getCiudad() {
-        return ciudad;
+    public Integer getCodigo_ciudad() {
+        return codigo_ciudad;
     }
 
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
+    public void setCodigo_ciudad(Integer codigo_ciudad) {
+        this.codigo_ciudad = codigo_ciudad;
     }
 
-    public Integer getInstalacionM2() {
+    public Integer getIntalacionM2() {
         return intalacionM2;
     }
 
-    public void setInstalacionM2(Integer intalacionM2) {
+    public void setIntalacionM2(Integer intalacionM2) {
         this.intalacionM2 = intalacionM2;
     }
 
@@ -74,6 +62,8 @@ public class Sucursal {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+    
+    
     
 }
 

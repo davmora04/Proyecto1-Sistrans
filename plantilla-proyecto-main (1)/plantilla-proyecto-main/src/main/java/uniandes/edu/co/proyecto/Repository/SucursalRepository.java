@@ -12,8 +12,8 @@ import uniandes.edu.co.proyecto.model.Sucursal;
 public interface SucursalRepository extends JpaRepository <Sucursal, Integer> {
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO sucursal (id, nombre, codigo_ciudad, intalacionM2, telefono) VALUES (:id, :nombre, :codigo_ciudad, :intalacionM2, :telefono)", nativeQuery = true)
-    void insertarSucursal(@Param("id") Integer id, @Param("nombre") String nombre, @Param("codigo_ciudad") Integer codigo_ciudad, @Param("intalacionM2") Integer intalacionM2, @Param("telefono") String telefono);
+    @Query(value = "INSERT INTO sucursal (id_sucursal, nombre, codigo_ciudad, intalacionM2, telefono) VALUES (:id_sucursal, :nombre, :codigo_ciudad, :intalacionM2, :telefono)", nativeQuery = true)
+    void insertarSucursal(@Param("id_sucursal") Integer id_sucursal, @Param("nombre") String nombre, @Param("codigo_ciudad") Integer codigo_ciudad, @Param("intalacionM2") Integer intalacionM2, @Param("telefono") String telefono);
     
     
 }

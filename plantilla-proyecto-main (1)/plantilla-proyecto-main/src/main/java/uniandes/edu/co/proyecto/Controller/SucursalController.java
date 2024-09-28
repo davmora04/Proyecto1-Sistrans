@@ -33,7 +33,7 @@ public class SucursalController {
 @PostMapping("/sucursal/new/save")
     public ResponseEntity<?> createSucursal(@RequestBody Sucursal sucursal) {
         try {
-            sucursalRepository.insertarSucursal(sucursal.getId(), sucursal.getNombre(), sucursal.getCiudad().getCodigo(), sucursal.getInstalacionM2(), sucursal.getTelefono());
+            sucursalRepository.insertarSucursal(sucursal.getId_sucursal(), sucursal.getNombre(), sucursal.getCodigo_ciudad(), sucursal.getIntalacionM2(), sucursal.getTelefono());
             return ResponseEntity.status(HttpStatus.CREATED).body("Sucursal creada exitosamente");
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear la sucursal: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
