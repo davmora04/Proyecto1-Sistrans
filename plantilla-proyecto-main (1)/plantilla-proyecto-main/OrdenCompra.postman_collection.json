@@ -22,7 +22,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idCompra\": 1,\r\n    \"cantidad\": 100,\r\n    \"precioAcordado\": 5000,\r\n    \"fechaEspera\": \"2024-10-10\",\r\n    \"fechaCreacion\": \"2024-09-28\",\r\n    \"estado\": \"vigente\",\r\n    \"idSucursal\": 1,\r\n    \"idProducto\": 2,\r\n    \"idProveedor\": 3\r\n}\r\n",
+					"raw": "{\r\n    \"cantidad\": 93400,\r\n    \"precioAcordado\": 98000000,\r\n    \"fechaEspera\": \"2024-10-10\",\r\n    \"estado\": \"vigente\",\r\n    \"idSucursal\": 1234444444,\r\n    \"idProducto\": 1,\r\n    \"idProveedor\": 12\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "Obtener todas las órdenes de compra",
+			"name": "Mostrar Ordenes de Compra",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -63,20 +63,36 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/ordencompra?Content-Type=application/json",
+					"raw": "http://localhost:8080/ordencompra/listar",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ordencompra"
+						"ordencompra",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anular Prueba de Compra",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ordencompra/anular/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
 					],
-					"query": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						}
+					"port": "8080",
+					"path": [
+						"ordencompra",
+						"anular",
+						"4"
 					]
 				}
 			},

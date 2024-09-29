@@ -2,6 +2,7 @@ package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,5 +55,49 @@ public class OrdenCompraController {
     @GetMapping("/test")
     public String test() {
         return "Servidor funcionando correctamente";
+    }
+
+
+     // Método para anular una orden de compra
+     @PutMapping("/ordencompra/anular/{id}")
+     public ResponseEntity<String> anularOrdenCompra(@PathVariable Integer id) {
+         try {
+             // Buscar la orden de compra por su ID
+             Optional<OrdenCompra> optionalOrdenCompra = ordenCompraRepository.findById(id);
+ 
+             if (optionalOrdenCompra.isPresent()) {
+                 OrdenCompra ordenCompra = optionalOrdenCompra.get();
+ 
+                 // Verificar si la orden ya está en estado "entregada"
+                 if ("entregada".equalsIgnoreCase(ordenCompra.getEstado())) {
+                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                             .body("No se puede anular una orden de compra que ya ha sido entregada.");
+                 }
+ 
+                 // Cambiar el estado de la orden a "anulada"
+                 ordenCompra.setEstado("anulada");
+                 ordenCompraRepository.save(ordenCompra); // Guardar los cambios
+ 
+                 return ResponseEntity.ok("La orden de compra ha sido anulada exitosamente.");
+             } else {
+                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                         .body("No se encontró la orden de compra con ID: " + id);
+             }
+         } catch (Exception e) {
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                     .body("Error al anular la orden de compra.");
+         }
+     }
+
+   // Método para mostrar todas las órdenes de compra
+    @GetMapping("/ordencompra/listar")
+    public ResponseEntity<Iterable<OrdenCompra>> listarTodasLasOrdenesCompra() {
+        try {
+            // Obtener todas las órdenes de compra desde la base de datos
+            Collection<OrdenCompra> ordenesCompra = ordenCompraRepository.findAll();
+            return ResponseEntity.ok(ordenesCompra);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }
