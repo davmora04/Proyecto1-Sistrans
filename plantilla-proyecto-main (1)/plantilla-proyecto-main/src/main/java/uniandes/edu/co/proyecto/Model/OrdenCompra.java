@@ -1,44 +1,39 @@
 package uniandes.edu.co.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-
 import java.util.Date;
 
 @Entity
 @Table(name="ORDENCOMPRA")
 public class OrdenCompra {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+
+@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orden_compra_seq")
+    @SequenceGenerator(name = "orden_compra_seq", sequenceName = "SEQ_ID_COMPRA", allocationSize = 1)
     private Integer idCompra;
 
     private Integer cantidad;
+        
+    @Column(name = "PRECIOACORDADO")  
+
     private Double precioAcordado;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(name = "FECHAESPERA")
     private Date fechaEspera;
-    private Date fechaCreacion; // Fecha de creación automática
+
     private String estado;
     private Integer idSucursal;
     private Integer idProducto;
     private Integer idProveedor;
-
-    // Constructor vacío
-    public OrdenCompra() {}
-
-    // Constructor con parámetros
-    public OrdenCompra(Integer idCompra, Integer cantidad, Double precioAcordado, Date fechaEspera, Integer idSucursal, Integer idProducto, Integer idProveedor) {
-        this.idCompra = idCompra;
-        this.cantidad = cantidad;
-        this.precioAcordado = precioAcordado;
-        this.fechaEspera = fechaEspera;
-        this.idSucursal = idSucursal;
-        this.idProducto = idProducto;
-        this.idProveedor = idProveedor;
-        this.fechaCreacion = new Date(); // Se establece al crear la orden
-        this.estado = "vigente"; // Por defecto la orden se crea en estado "vigente"
-    }
 
     // Getters y Setters
     public Integer getIdCompra() {
@@ -72,15 +67,6 @@ public class OrdenCompra {
     public void setFechaEspera(Date fechaEspera) {
         this.fechaEspera = fechaEspera;
     }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
     public String getEstado() {
         return estado;
     }

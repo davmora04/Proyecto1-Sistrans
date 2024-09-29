@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uniandes.edu.co.proyecto.model.OrdenCompra;
 import uniandes.edu.co.proyecto.repository.OrdenCompraRepository;
 
-@RestController // Cambiado a RestController para devolver JSON directamente
+@RestController
 public class OrdenCompraController {
 
     @Autowired
@@ -38,7 +38,6 @@ public class OrdenCompraController {
     public ResponseEntity<?> crearOrdenCompra(@RequestBody OrdenCompra ordenCompra) {
         try {
             // Establecer la fecha de creación como la fecha actual
-            ordenCompra.setFechaCreacion(new Date()); 
             // Establecer el estado de la orden como 'vigente'
             ordenCompra.setEstado("vigente"); 
 
@@ -50,26 +49,10 @@ public class OrdenCompraController {
         }
     }
 
-    // Método para anular una orden de compra
-    @PutMapping("/ordencompra/{id}/anular")
-    public ResponseEntity<?> anularOrdenCompra(@PathVariable Integer id) {
-        try {
-            // Actualizamos el estado de la orden de compra si está en estado 'vigente'
-            int filasAfectadas = ordenCompraRepository.anularOrdenCompra(id);
 
-            if (filasAfectadas == 0) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La orden de compra no está en estado 'vigente' o no existe.");
-            }
-
-            return ResponseEntity.ok("Orden de compra anulada exitosamente.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al anular la orden de compra.");
-        }
-    }
-
+    // Método de prueba para verificar si el servidor funciona
     @GetMapping("/test")
-public String test() {
-    return "Servidor funcionando correctamente";
-}
-
+    public String test() {
+        return "Servidor funcionando correctamente";
+    }
 }
