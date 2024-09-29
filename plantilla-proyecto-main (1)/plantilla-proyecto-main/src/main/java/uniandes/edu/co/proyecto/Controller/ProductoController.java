@@ -1,5 +1,6 @@
 package uniandes.edu.co.proyecto.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -101,4 +102,35 @@ public class ProductoController {
             return new ResponseEntity<>("Error al actualizar el Producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/productos/filtrar")
+    public ResponseEntity<?> filtrarProductos(@RequestBody Map<String, Object> body) {
+
+        // Parse optional fields from JSON body
+        Double minPrecio = body.containsKey("minPrecio") ? ((Number) body.get("minPrecio")).doubleValue() : null;
+        Double maxPrecio = body.containsKey("maxPrecio") ? ((Number) body.get("maxPrecio")).doubleValue() : null;
+        String expirationDateStr = (String) body.get("expirationDateStr");
+        Integer idCategoria = body.containsKey("idCategoria") ? (Integer) body.get("idCategoria") : null;
+
+        LocalDate expirationDate = null;
+
+        // Parse expiration date if provided
+        if (expirationDateStr != null) {
+            try {
+                expirationDate = LocalDate.parse(expirationDateStr);
+            } catch (DateTimeParseException e) {
+                return new ResponseEntity<>("Fecha de expiración inválida", HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        // Fetch the products matching the criteria
+        List<Producto> productos = productoRepository.buscarProductosPorCriterios(
+                minPrecio, maxPrecio, expirationDate, idCategoria);
+        
+        if (productos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity<>(productos, HttpStatus.OK);
+    }
+
 }

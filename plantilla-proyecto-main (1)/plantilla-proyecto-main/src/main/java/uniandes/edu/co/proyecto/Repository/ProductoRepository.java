@@ -1,6 +1,9 @@
 package uniandes.edu.co.proyecto.repository;
 
 import java.time.LocalDate;
+import java.util.List;
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -35,4 +38,16 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
                             @Param("precioventa") Double precioventa, @Param("presentacion") String presentacion, 
                             @Param("cantidadpresentacion") Integer cantidadpresentacion, @Param("unidadmedida") String unidadmedida, 
                             @Param("expiracion") LocalDate expiracion, @Param("id_categoria") Integer id_categoria);
+    //rfc2
+    @Query(value = "SELECT p.* FROM PRODUCTO p " +
+    "JOIN CATEGORIA c ON p.ID_CATEGORIA = c.ID_CATEGORIA " +
+    "WHERE (:minPrecio IS NULL OR p.PRECIOVENTA >= :minPrecio) " +
+    "AND (:maxPrecio IS NULL OR p.PRECIOVENTA <= :maxPrecio) " +
+    "AND (:expirationDate IS NULL OR p.EXPIRACION >= :expirationDate) " +
+    "AND (:idCategoria IS NULL OR c.ID_CATEGORIA = :idCategoria)", nativeQuery = true)
+    List<Producto> buscarProductosPorCriterios(@Param("minPrecio") Double minPrecio,
+                                @Param("maxPrecio") Double maxPrecio,
+                                @Param("expirationDate") LocalDate expirationDate,
+                                @Param("idCategoria") Integer idCategoria);
+             
 }
