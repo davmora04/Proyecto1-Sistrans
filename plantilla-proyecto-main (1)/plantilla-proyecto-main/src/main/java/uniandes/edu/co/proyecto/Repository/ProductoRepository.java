@@ -49,5 +49,18 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
                                 @Param("maxPrecio") Double maxPrecio,
                                 @Param("expirationDate") LocalDate expirationDate,
                                 @Param("idCategoria") Integer idCategoria);
-             
+    
+                                
+
+    @Query(value = "SELECT p.ID_PRODUCTO, p.NOMBRE, p.CODIGOBARRAS, p.PRECIOVENTA, " +
+    "i.TOTALEXISTENCIAS, i.MIVELMINREORDEN, i.COSTOPROMEDIO " +
+    "FROM PRODUCTO p " +
+    "JOIN INFOEXTRABODEGA i ON p.ID_PRODUCTO = i.ID_PRODUCTO " +
+    "JOIN BODEGA b ON i.ID_BODEGA = b.ID_BODEGA " +
+    "JOIN SUCURSAL s ON b.ID_SUCURSAL = s.ID_SUCURSAL " +
+    "WHERE s.ID_SUCURSAL = :idSucursal AND b.ID_BODEGA = :idBodega", 
+        nativeQuery = true)
+        List<Object[]> obtenerInventarioProductos(@Param("idSucursal") Integer idSucursal, @Param("idBodega") Integer idBodega);
+                            
+
 }

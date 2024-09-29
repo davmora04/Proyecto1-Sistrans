@@ -102,6 +102,7 @@ public class ProductoController {
             return new ResponseEntity<>("Error al actualizar el Producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    //rfc2
     @PostMapping("/productos/filtrar")
     public ResponseEntity<?> filtrarProductos(@RequestBody Map<String, Object> body) {
 
@@ -132,5 +133,27 @@ public class ProductoController {
         
         return new ResponseEntity<>(productos, HttpStatus.OK);
     }
+    //rfc3
+    @PostMapping("/inventario/bodega")
+    public ResponseEntity<?> obtenerInventario(@RequestBody Map<String, Integer> body) {
+        try {
+            Integer idSucursal = body.get("idSucursal");
+            Integer idBodega = body.get("idBodega");
+
+            if (idSucursal == null || idBodega == null) {
+                return new ResponseEntity<>("Both idSucursal and idBodega are required.", HttpStatus.BAD_REQUEST);
+            }
+
+            List<Object[]> inventario = productoRepository.obtenerInventarioProductos(idSucursal, idBodega);
+            if (inventario.isEmpty()) {
+                return new ResponseEntity<>("No se encontraron productos en la bodega.", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(inventario, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al obtener el inventario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    
 
 }
