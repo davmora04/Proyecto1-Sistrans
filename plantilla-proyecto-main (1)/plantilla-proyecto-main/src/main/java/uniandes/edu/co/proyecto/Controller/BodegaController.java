@@ -1,7 +1,7 @@
 package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,6 +82,24 @@ public class BodegaController {
             return new ResponseEntity<>("Error al eliminar la Bodega: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+// Endpoint to get the occupancy percentage of bodegas in a specific branch (Sucursal)@PostMapping("/bodega/ocupacion")
+@PostMapping("/bodega/ocupacion")
+public ResponseEntity<?> getOcupacionBodegas(@RequestBody Map<String, Object> body) {
+    try {
+        List<Integer> listaProductos = (List<Integer>) body.get("productos");
+        Integer idSucursal = (Integer) body.get("id_sucursal");
+
+        if (listaProductos == null || listaProductos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La lista de productos es requerida.");
+        }
+
+        Collection<Map<String, Object>> resultados = bodegaRepository.obtenerOcupacionBodegasPorProductos(idSucursal, listaProductos);
+        return ResponseEntity.ok(resultados);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener el porcentaje de ocupación: " + e.getMessage());
+    }
+}
 
 
 
