@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "6193036d-0e1a-4f94-b5c6-be4c7210e0ea",
+		"name": "Pruebas requerimientos funcionales DMR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37633875"
+	},
+	"item": [
+		{
+			"name": "req4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/producto/3001/sucursales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"3001",
+						"sucursales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "req5",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "req1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bodegas/ocupacion?idSucursal=1001&listaProductos=3001,3002,3003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bodegas",
+						"ocupacion"
+					],
+					"query": [
+						{
+							"key": "idSucursal",
+							"value": "1001"
+						},
+						{
+							"key": "listaProductos",
+							"value": "3001,3002,3003"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
