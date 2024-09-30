@@ -154,6 +154,24 @@ public class ProductoController {
         }
     }
 
-    
+    // Endpoint para obtener productos que requieren reorden
+    @GetMapping("/productos/reorden")
+    public ResponseEntity<?> getProductosReorden() {
+        try {
+            // Llamamos a la consulta del repositorio
+            List<Map<String, Object>> productosReorden = productoRepository.findProductosPorReorden();
+
+            // Si no se encuentran productos, devolvemos un 404
+            if (productosReorden.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron productos que requieran una nueva orden de compra.");
+            }
+
+            // Devolvemos los productos en estado 200
+            return ResponseEntity.ok(productosReorden);
+        } catch (Exception e) {
+            // Si ocurre algún error, devolvemos un 500 con el mensaje de error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+    }
 
 }

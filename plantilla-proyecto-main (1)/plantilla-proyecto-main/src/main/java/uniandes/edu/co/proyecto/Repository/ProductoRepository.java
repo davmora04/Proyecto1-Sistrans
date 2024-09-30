@@ -2,7 +2,7 @@ package uniandes.edu.co.proyecto.repository;
 
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -62,5 +62,15 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
         nativeQuery = true)
         List<Object[]> obtenerInventarioProductos(@Param("idSucursal") Integer idSucursal, @Param("idBodega") Integer idBodega);
                             
-
+        @Query(value = "SELECT p.ID_PRODUCTO, p.NOMBRE AS NOMBRE_PRODUCTO, b.ID_BODEGA, b.NOMBRE AS NOMBRE_BODEGA, " +
+        "s.ID_SUCURSAL, s.NOMBRE AS NOMBRE_SUCURSAL, bp.CANTIDAD AS CANTIDAD_ACTUAL, " +
+        "pr.ID_PROVEEDOR, pr.NOMBRE AS NOMBRE_PROVEEDOR " +
+        "FROM PRODUCTO p " +
+        "JOIN BODEGA_PRODUCTO bp ON p.ID_PRODUCTO = bp.ID_PRODUCTO " +
+        "JOIN BODEGA b ON bp.ID_BODEGA = b.ID_BODEGA " +
+        "JOIN SUCURSAL s ON b.ID_SUCURSAL = s.ID_SUCURSAL " +
+        "LEFT JOIN PRODUCTOPROVEEDOR pp ON p.ID_PRODUCTO = pp.ID_PRODUCTO " +
+        "LEFT JOIN PROVEEDORES pr ON pp.ID_PROVEEDOR = pr.ID_PROVEEDOR " +
+        "WHERE bp.CANTIDAD < b.CANTIDAD_PROD", nativeQuery = true)
+List<Map<String, Object>> findProductosPorReorden();
 }
