@@ -42,6 +42,19 @@ public class CategoriaProductoController {
     }
 
     //@GetMapping("/categoria/leer")
+    // Get category by ID
+    @GetMapping("/categoria/leer/{id}")
+    public ResponseEntity<?> leerCategoria(@PathVariable("id") Integer idCategoria) {
+        try {
+            CategoriaProducto categoria = categoriaProductoRepository.findById(idCategoria).orElse(null);
+            if (categoria == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria no encontrada");
+            }
+            return ResponseEntity.ok(categoria);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al leer la categoria: " + e.getMessage());
+        }
+    }
     
     
     
