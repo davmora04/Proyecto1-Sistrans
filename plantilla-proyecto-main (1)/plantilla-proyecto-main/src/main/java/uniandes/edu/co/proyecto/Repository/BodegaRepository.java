@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import uniandes.edu.co.proyecto.model.RecepcionProducto;
 
 import uniandes.edu.co.proyecto.model.Bodega;
 
@@ -47,4 +48,12 @@ public interface BodegaRepository extends JpaRepository<Bodega, Integer> {
     nativeQuery = true)
 Collection<Map<String, Object>> obtenerOcupacionBodegasPorProductos(@Param("idSucursal") Integer idSucursal, @Param("listaProductos") List<Integer> listaProductos);
 
+@Transactional(readOnly = true)
+@Query("SELECT r FROM RecepcionProducto r " +
+       "JOIN r.bodega b " +
+       "JOIN r.producto p " +
+       "WHERE b.id_sucursal = :idSucursal AND b.id_bodega = :idBodega AND r.fechaRecepcion >= CURRENT_DATE - 30")
+List<RecepcionProducto> findRecepcionProductosBySucursalAndBodega(
+        @Param("idSucursal") Integer idSucursal,
+        @Param("idBodega") Integer idBodega);
 }

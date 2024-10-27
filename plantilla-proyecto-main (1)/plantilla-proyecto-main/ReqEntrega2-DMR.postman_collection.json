@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "64852d6d-7f4f-4e55-930b-9b4e86c316b6",
+		"name": "ReqEntrega2-DMR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37633875"
+	},
+	"item": [
+		{
+			"name": "ReqF6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/recepcion/sucursal/1001/bodega/2001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recepcion",
+						"sucursal",
+						"1001",
+						"bodega",
+						"2001"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
