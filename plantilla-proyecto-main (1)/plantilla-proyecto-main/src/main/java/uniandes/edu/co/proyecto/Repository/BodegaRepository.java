@@ -48,6 +48,7 @@ public interface BodegaRepository extends JpaRepository<Bodega, Integer> {
     nativeQuery = true)
 Collection<Map<String, Object>> obtenerOcupacionBodegasPorProductos(@Param("idSucursal") Integer idSucursal, @Param("listaProductos") List<Integer> listaProductos);
 
+//CORREGIR
 @Transactional(readOnly = true)
 @Query("SELECT r FROM RecepcionProducto r " +
        "JOIN r.bodega b " +

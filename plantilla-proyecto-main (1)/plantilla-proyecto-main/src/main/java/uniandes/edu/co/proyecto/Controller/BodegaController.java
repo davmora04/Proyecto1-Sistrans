@@ -101,6 +101,6 @@ public ResponseEntity<?> getOcupacionBodegas(@RequestBody Map<String, Object> bo
     }
 }
 
-
+//comentaro para commit?
 
 }

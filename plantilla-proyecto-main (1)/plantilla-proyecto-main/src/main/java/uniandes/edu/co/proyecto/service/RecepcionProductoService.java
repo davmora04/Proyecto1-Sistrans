@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import uniandes.edu.co.proyecto.model.RecepcionProducto;
-import uniandes.edu.co.proyecto.repository.BodegaRepository;
+
+import uniandes.edu.co.proyecto.repository.RecepcionProductoRepository;
 
 import java.util.List;
 
@@ -13,7 +14,9 @@ import java.util.List;
 public class RecepcionProductoService {
 
     @Autowired
-    private BodegaRepository bodegaRepository;
+    private RecepcionProductoRepository recepcionProductoRepository;
+
+
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public List<RecepcionProducto> obtenerDocumentosIngreso(Integer idSucursal, Integer idBodega) {
@@ -22,7 +25,7 @@ public class RecepcionProductoService {
             Thread.sleep(30000);
 
             // Llamada al método del repositorio
-            return bodegaRepository.findRecepcionProductosBySucursalAndBodega(idSucursal, idBodega);
+            return recepcionProductoRepository.buscarDocumentosIngreso(idSucursal, idBodega);
 
         } catch (InterruptedException e) {
             System.out.println("El temporizador fue interrumpido: " + e.getMessage());
