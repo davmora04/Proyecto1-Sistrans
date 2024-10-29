@@ -39,6 +39,8 @@ public class Producto {
 
     // Getters and Setters
     public Integer getId_producto() {
+
+        
         return id_producto;
     }
 
