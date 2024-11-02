@@ -57,4 +57,64 @@ Collection<Map<String, Object>> obtenerOcupacionBodegasPorProductos(@Param("idSu
 List<RecepcionProducto> findRecepcionProductosBySucursalAndBodega(
         @Param("idSucursal") Integer idSucursal,
         @Param("idBodega") Integer idBodega);
+
+/* @Transactional(rollbackFor = Exception.class)
+@Query(value = //"DELETE " + "RECEPCIONPRODUCTO "  + "WHERE " + "id_recepcion=2; " +
+//"DELETE " + "BODEGA_PRODUCTO " + "WHERE " + "ID_BODEGA = 2001 " + "AND " + "ID_PRODUCTO = 3001" 
+"UPDATE ORDENCOMPRA " + "SET ESTADO = 'anulada' " + "WHERE " + "ID_COMPRA = 1" 
+
+//"INSERT " + "INTO " + "RECEPCIONPRODUCTO (ID_RECEPCION, FECHARECEPCION, CANTIDADRECIBIDA, COSTOUNITARIO, ID_BODEGA, ID_PRODUCTO) " + "VALUES (2, SYSDATE, v_cantidad_recibida, v_costo_unitario, v_id_bodega, v_id_producto;" 
+
+, nativeQuery = true)
+void insertarProductoBodega(@Param("v_id_orden") Integer v_id_orden, @Param("v_id_producto") Integer v_id_producto, 
+@Param("v_id_bodega") Integer v_id_bodega, @Param("v_cantidad_recibida") Integer v_cantidad_recibida, 
+@Param("v_costo_unitario") Double v_costo_unitario, @Param("v_cantidad_existente") Integer v_cantidad_existente,
+@Param("v_cantidad_orden") Integer v_cantidad_orden); 
+
 }
+
+*/
+// 1. Eliminar Recepción de Producto
+@Modifying
+@Transactional
+@Query(value = "DELETE FROM RECEPCIONPRODUCTO WHERE ID_RECEPCION = :idRecepcion", nativeQuery = true)
+void eliminarRecepcionProducto(@Param("idRecepcion") Integer idRecepcion);
+
+// 2. Eliminar Producto de la Bodega
+@Modifying
+@Transactional
+@Query(value = "DELETE FROM BODEGA_PRODUCTO WHERE ID_BODEGA = :idBodega AND ID_PRODUCTO = :idProducto", nativeQuery = true)
+void eliminarProductoDeBodega(@Param("idBodega") Integer idBodega, @Param("idProducto") Integer idProducto);
+
+// 3. Actualizar el estado de la Orden de Compra a 'anulada'
+@Modifying
+@Transactional
+@Query(value = "UPDATE ORDENCOMPRA SET ESTADO = 'anulada' WHERE ID_COMPRA = :idCompra", nativeQuery = true)
+void actualizarEstadoOrdenCompra(@Param("idCompra") Integer idCompra);
+
+// 4. Insertar Recepción de Producto
+@Modifying
+@Transactional
+@Query(value = "INSERT INTO RECEPCIONPRODUCTO (ID_RECEPCION, FECHARECEPCION, CANTIDADRECIBIDA, COSTOUNITARIO, ID_BODEGA, ID_PRODUCTO) " +
+               "VALUES (:idRecepcion, SYSDATE, :cantidadRecibida, :costoUnitario, :idBodega, :idProducto)", nativeQuery = true)
+void insertarRecepcionProducto(@Param("idRecepcion") Integer idRecepcion, @Param("cantidadRecibida") Integer cantidadRecibida,
+                               @Param("costoUnitario") Double costoUnitario, @Param("idBodega") Integer idBodega, @Param("idProducto") Integer idProducto);
+
+// 5. Actualizar la cantidad en Bodega
+@Modifying
+@Transactional
+@Query(value = "UPDATE BODEGA_PRODUCTO SET CANTIDAD = CANTIDAD + :cantidadRecibida WHERE ID_BODEGA = :idBodega AND ID_PRODUCTO = :idProducto", nativeQuery = true)
+void actualizarCantidadBodega(@Param("idBodega") Integer idBodega, @Param("idProducto") Integer idProducto, @Param("cantidadRecibida") Integer cantidadRecibida);
+
+// 6. Actualizar el estado de la Orden de Compra a 'ENTREGADA'
+@Modifying
+@Transactional
+@Query(value = "UPDATE ORDENCOMPRA SET ESTADO = 'ENTREGADA' WHERE ID_COMPRA = :idOrden", nativeQuery = true)
+void actualizarEstadoOrdenEntregada(@Param("idOrden") Integer idOrden);
+
+
+
+}
+
+
+
