@@ -80,11 +80,11 @@ void insertarProductoBodega(@Param("v_id_orden") Integer v_id_orden, @Param("v_i
 @Query(value = "DELETE FROM RECEPCIONPRODUCTO WHERE ID_RECEPCION = :idRecepcion", nativeQuery = true)
 void eliminarRecepcionProducto(@Param("idRecepcion") Integer idRecepcion);
 
-// 2. Eliminar Producto de la Bodega
+/*// 2. Eliminar Producto de la Bodega
 @Modifying
 @Transactional
 @Query(value = "DELETE FROM BODEGA_PRODUCTO WHERE ID_BODEGA = :idBodega AND ID_PRODUCTO = :idProducto", nativeQuery = true)
-void eliminarProductoDeBodega(@Param("idBodega") Integer idBodega, @Param("idProducto") Integer idProducto);
+void eliminarProductoDeBodega(@Param("idBodega") Integer idBodega, @Param("idProducto") Integer idProducto); */
 
 // 3. Actualizar el estado de la Orden de Compra a 'anulada'
 @Modifying

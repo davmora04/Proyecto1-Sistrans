@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -104,6 +105,7 @@ public ResponseEntity<?> getOcupacionBodegas(@RequestBody Map<String, Object> bo
 }
 
 @PostMapping("/bodega/recepcion") 
+@Transactional(rollbackFor = Exception.class)
 public ResponseEntity<?> getInsertarProductoBodega(@RequestParam("v_id_orden") Integer v_id_orden, @RequestParam("v_id_producto") Integer v_id_producto, 
 @RequestParam("v_id_bodega") Integer v_id_bodega, @RequestParam("v_cantidad_recibida") Integer v_cantidad_recibida, 
 @RequestParam("v_costo_unitario") Double v_costo_unitario, @RequestParam("v_cantidad_existente") Integer v_cantidad_existente,
@@ -114,16 +116,16 @@ public ResponseEntity<?> getInsertarProductoBodega(@RequestParam("v_id_orden") I
         bodegaRepository.eliminarRecepcionProducto(2);
 
         // 2. Eliminar Producto de la Bodega
-        bodegaRepository.eliminarProductoDeBodega(v_id_bodega, v_id_producto);
+        //bodegaRepository.eliminarProductoDeBodega(v_id_bodega, v_id_producto);
 
         // 3. Actualizar el Estado de la Orden de Compra a 'anulada'
         bodegaRepository.actualizarEstadoOrdenCompra(v_id_orden);
 
         // 4. Insertar Recepción de Producto
-        bodegaRepository.insertarRecepcionProducto(2,  v_cantidad_orden, v_costo_unitario, v_id_bodega, v_id_producto);
+        bodegaRepository.insertarRecepcionProducto(2,  v_cantidad_recibida, v_costo_unitario, v_id_bodega, v_id_producto);
 
         // 5. Actualizar la Cantidad en Bodega
-        bodegaRepository.actualizarCantidadBodega(v_id_bodega, v_id_producto,  v_cantidad_orden);
+        bodegaRepository.actualizarCantidadBodega(v_id_bodega, v_id_producto,  v_cantidad_recibida);
 
         // 6. Actualizar el Estado de la Orden de Compra a 'ENTREGADA'
         bodegaRepository.actualizarEstadoOrdenEntregada(v_id_orden);
