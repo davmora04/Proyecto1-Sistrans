@@ -14,7 +14,7 @@ public class RecepcionProductoService {
     @Autowired
     private RecepcionProductoRepository recepcionProductoRepository;
 
-    @Transactional (isolation = Isolation.SERIALIZABLE)
+    @Transactional (isolation = Isolation.SERIALIZABLE, readOnly = true)
     public List<Map<String, Object>> obtenerDocumentosIngreso(Integer idSucursal, Integer idBodega) {
         
         try {

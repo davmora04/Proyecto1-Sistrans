@@ -112,6 +112,7 @@ public ResponseEntity<?> getInsertarProductoBodega(@RequestParam("v_id_orden") I
 @RequestParam("v_cantidad_orden") Integer v_cantidad_orden) {
 
     try {
+        //Thread.sleep(30000);
         // 1. Eliminar Recepción de Producto
         bodegaRepository.eliminarRecepcionProducto(2);
 
